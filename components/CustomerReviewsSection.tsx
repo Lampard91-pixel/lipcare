@@ -1,56 +1,87 @@
 "use client";
 
-import Image from "next/image";
+import { Star } from "lucide-react";
 
-export default function CustomerReviewSection() {
-  const testimonials = [
-    {
-      name: "Amira, Student",
-      image: "/tes1.jpg",
-      quote:
-        "My lips used to get dry and cracked every winter. I tried so many balms, but nothing worked. After switching to this lipcare, my lips stay soft and smooth all day – even in harmattan season!",
-    },
-    {
-      name: "Sara, Makeup Enthusiast",
-      image: "/tes2.jpg",
-      quote:
-        "This lip balm is my holy grail! It keeps my lips hydrated without feeling sticky, so my lipstick goes on perfectly. I finally found a lip product that I can’t live without!",
-    },
-    {
-      name: "Kathy & Patrick, Newlyweds",
-      image: "/tes3.jpg",
-      quote:
-        "We both struggled with dry, chapped lips. Now, with this lipcare, our lips stay moisturized and kissably soft all day. It’s a must-have in our daily routine!",
-    },
-  ];
+const reviews = [
+  {
+    id: 1,
+    name: "Aisha B.",
+    rating: 5,
+    text: "Absolutely love the vanilla lip balm! It's so moisturizing and smells divine. My lips have never been softer. Highly recommend!",
+    avatar: "https://i.pravatar.cc/48?u=aisha",
+  },
+  {
+    id: 2,
+    name: "Tunde O.",
+    rating: 5,
+    text: "I was skeptical at first, but this is the real deal. The lip scrub works wonders and the gloss gives a perfect shine without being sticky.",
+    avatar: "https://i.pravatar.cc/48?u=tunde",
+  },
+  {
+    id: 3,
+    name: "Chiamaka E.",
+    rating: 4,
+    text: "Great products! The packaging is beautiful and the quality is top-notch. The lip oil is my favorite. Will be buying again.",
+    avatar: "https://i.pravatar.cc/48?u=chiamaka",
+  },
+];
 
+const StarRating = ({ rating }: { rating: number }) => (
+  <div className="flex items-center">
+    {Array.from({ length: 5 }).map((_, i) => (
+      <Star
+        key={i}
+        className={`h-4 w-4 sm:h-5 sm:w-5 ${
+          i < rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
+        }`}
+      />
+    ))}
+  </div>
+);
+
+export default function CustomerReviewsSection() {
   return (
-    <section className="bg-gray-100 py-20">
-      {/* Heading */}
-      <h2 className="text-center text-5xl font-serif font-bold text-[#0f3c4c] mb-16">
-        Loved by Real People
-      </h2>
-
-      {/* Testimonials */}
-      <div className="flex justify-center gap-4 flex-wrap">
-        {testimonials.map((t, index) => (
-          <div
-            key={index}
-            className="flex flex-col items-center text-center max-w-[280px]"
+    <section className="py-12 sm:py-16 bg-white">
+      <div className="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8">
+        {/* Section header */}
+        <div className="text-center">
+          <h2
+            className="text-2xl sm:text-3xl font-bold text-cyan-900"
+            style={{ fontFamily: "var(--font-playfair)" }}
           >
-            <Image
-              src={t.image}
-              alt={t.name}
-              width={260}
-              height={260}
-              className="rounded-lg object-cover w-[260px] h-[260px]"
-            />
-            <h3 className="mt-3 font-semibold text-lg">{t.name}</h3>
-            <p className="mt-2 text-gray-600 italic">
-              “{t.quote}”
-            </p>
-          </div>
-        ))}
+            What Our Customers Say
+          </h2>
+          <p className="mt-2 text-sm sm:text-base text-gray-600">
+            Real reviews from real lip care lovers.
+          </p>
+        </div>
+
+        {/* Reviews grid */}
+        <div className="mt-10 grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-3">
+          {reviews.map((review) => (
+            <div
+              key={review.id}
+              className="bg-gray-50 p-5 sm:p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300"
+            >
+              <div className="flex items-center mb-4">
+                <img
+                  className="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover"
+                  src={review.avatar}
+                  alt={review.name}
+                />
+                <div className="ml-3 sm:ml-4">
+                  <p className="font-semibold text-gray-900 text-sm sm:text-base">
+                    {review.name}
+                  </p>
+                  <StarRating rating={review.rating} />
+                </div>
+              </div>
+              <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
+                &quot;{review.text}&quot;
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

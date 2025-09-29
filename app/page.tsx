@@ -1,19 +1,25 @@
-import ProductDetailSection from "@/components/ProductDetailSection";
-import LipcareSection from "@/components/LipcareSection";
-import CustomerReviewsSection from "@/components/CustomerReviewsSection";
-import LipcareStory from "@/components/LipcareStory";
-import HeroSection from "@/components/banner";
+"use client";
 
+import Banner from "@/components/banner";
+import FeaturedProducts from "@/components/FeaturedProducts";
+import IngredientSpotlight from "@/components/IngredientSpotlight";
+import LipCareRoutine from "@/components/LipCareRoutine";
+import ShopByCategory from "@/components/ShopByCategory";
+import SocialFeed from "@/components/SocialFeed";
+import Testimonials from "@/components/Testimonials";
+import WhyChooseUs from "@/components/WhyChooseUs";
 
-export default function HomePage() {
+export default function Home() {
   return (
     <main>
-      <ProductDetailSection />
-       <LipcareSection />
-      <CustomerReviewsSection />
-      <LipcareStory />
-      <HeroSection />
-     
+      <Banner />
+      <FeaturedProducts />
+      <WhyChooseUs />
+      <ShopByCategory />
+      <LipCareRoutine />
+      <IngredientSpotlight />
+      <Testimonials />
+      <SocialFeed />
     </main>
   );
 }

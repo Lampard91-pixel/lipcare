@@ -1,93 +1,50 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Image from "next/image";
+import { Droplets, Leaf, Sun, Sparkles } from "lucide-react";
 
-export default function LipcareHero() {
-  const scrollToLipscrub = () => {
-    const section = document.getElementById("lipscrub");
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+const features = [
+  {
+    name: "Deep Hydration",
+    description: "Our formulas are packed with moisturizing ingredients to keep your lips soft and supple all day long.",
+    icon: Droplets,
+  },
+  {
+    name: "Natural Ingredients",
+    description: "We use only the finest, ethically-sourced natural ingredients. No harsh chemicals, ever.",
+    icon: Leaf,
+  },
+  {
+    name: "Sun Protection",
+    description: "Select products contain natural SPF to protect your delicate lips from harmful UV rays.",
+    icon: Sun,
+  },
+  {
+    name: "Beautiful Shine",
+    description: "Achieve the perfect glossy finish without the stickiness. For a look that feels as good as it looks.",
+    icon: Sparkles,
+  },
+];
 
-  const ribbonText =
-    "NOURISH. PROTECT. RADIATE. MADE IN LIPCRUSH • NOURISH. PROTECT. RADIATE. MADE IN LIPCRUSH • ";
-
+export default function LipcareSection() {
   return (
-    <div className="relative w-full overflow-hidden">
-      {/* 🔝 Top Ribbon (➡️ right to left seamless) */}
-      <div className="w-full bg-[#0f3c4c] text-white py-2 overflow-hidden">
-        <motion.div
-          animate={{ x: ["0%", "-100%"] }}
-          transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-          className="flex whitespace-nowrap font-semibold tracking-wide"
-        >
-          <span className="mr-8">{ribbonText}</span>
-          <span>{ribbonText}</span>
-        </motion.div>
+    <section className="bg-white py-12 sm:py-16">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-cyan-900">The Essentials of Lip Care</h2>
+          <p className="mt-2 text-base text-gray-600">Everything your lips need to stay healthy and beautiful.</p>
+        </div>
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {features.map((feature) => (
+            <div key={feature.name} className="text-center">
+              <div className="flex items-center justify-center h-12 w-12 rounded-full bg-cyan-100 text-cyan-900 mx-auto">
+                <feature.icon className="h-6 w-6" aria-hidden="true" />
+              </div>
+              <h3 className="mt-4 text-lg font-semibold text-gray-900">{feature.name}</h3>
+              <p className="mt-1 text-sm text-gray-600">{feature.description}</p>
+            </div>
+          ))}
+        </div>
       </div>
-
-      {/* 🎥 Hero Section */}
-      <div className="relative flex items-center justify-center min-h-[70vh] w-full overflow-hidden">
-        {/* Background Video */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover brightness-75"
-        >
-          <source src="/lip.mp4" type="video/mp4" />
-          <Image
-            src="/fir1.jpeg"
-            alt="Lipcare background"
-            fill
-            className="object-cover"
-          />
-        </video>
-
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/30"></div>
-
-        {/* Center Content */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative z-10 max-w-2xl text-center px-6"
-        >
-          <p className="text-white/90 italic text-lg">Introducing...</p>
-
-          <h1 className="text-3xl md:text-5xl font-serif font-bold text-white mt-2 drop-shadow-md">
-            Lipcare
-          </h1>
-
-          <p className="mt-4 text-base md:text-lg text-gray-200 leading-relaxed drop-shadow">
-            The ultimate daily ritual for soft, smooth, and nourished lips.
-            Hydration, protection, and repair — redefined for your pout.
-          </p>
-
-          <button
-            onClick={scrollToLipscrub}
-            className="mt-6 px-6 py-3 bg-white text-[#0f3c4c] font-semibold rounded-full shadow-lg hover:bg-gray-100 transition"
-          >
-            All about Lipscrub
-          </button>
-        </motion.div>
-      </div>
-
-      {/* 🔻 Bottom Ribbon (⬅️ left to right seamless) */}
-      <div className="w-full bg-[#0f3c4c] text-white py-2 overflow-hidden">
-        <motion.div
-          animate={{ x: ["-100%", "0%"] }}
-          transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-          className="flex whitespace-nowrap font-semibold tracking-wide"
-        >
-          <span className="mr-8">{ribbonText}</span>
-          <span>{ribbonText}</span>
-        </motion.div>
-      </div>
-    </div>
+    </section>
   );
 }

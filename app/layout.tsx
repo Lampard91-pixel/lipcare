@@ -1,8 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
+import { CartProvider } from "@/app/contexts/CartContext";
+import {
+  Geist,
+  Geist_Mono,
+  Playfair_Display,
+  Poppins,
+} from "next/font/google";
+
+
+// @ts-expect-error - Required for global CSS imports in TypeScript
 import "./globals.css";
-import HeaderWithBanner from "@/components/Header";  
-import Footer from "@/components/Footer"; 
+import LayoutFrame from "@/components/LayoutFrame";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,6 +23,18 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});
+
+const poppins = Poppins({
+  variable: "--font-poppins",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+});
+
 export const metadata: Metadata = {
   title: "LipCrush",
   description: "Lipscare",
@@ -21,18 +42,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      ><HeaderWithBanner />
-        {children}
-        <Footer />
-
-      </body>
-    </html>
+    <ClerkProvider>
+      <CartProvider>
+        <html lang="en">
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${poppins.variable} antialiased`}
+          >
+            <LayoutFrame>{children}</LayoutFrame>
+          </body>
+        </html>
+      </CartProvider>
+    </ClerkProvider>
   );
 }
